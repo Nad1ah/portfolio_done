@@ -1,0 +1,9 @@
+[build]
+  base = "nadiah-portfolio/"
+  command = "npm run build"
+  publish = "nadiah-portfolio/build"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
