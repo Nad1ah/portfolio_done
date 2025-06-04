@@ -17,6 +17,7 @@ import {
   Star,
   ChevronDown,
   Globe,
+  Instagram,
 } from "lucide-react";
 import profileImage from "./assets/profile.jpg";
 import "./App.css";
@@ -324,7 +325,10 @@ function App() {
                 whileTap={{ scale: 0.95 }}
                 className="btn-primary"
                 onClick={() =>
-                  window.open("./assets/cv_nadiah_mauricio.jpg", "_blank")
+                  window.open(
+                    "https://drive.google.com/file/d/1_26diCA-jINZmRwAZZm6gfCADtz-umhV/view",
+                    "_blank"
+                  )
                 }
               >
                 <Download size={20} />
@@ -363,11 +367,15 @@ function App() {
                   label: "LinkedIn",
                 },
                 {
+                  icon: Instagram,
+                  href: "https://www.instagram.com/nadiahamauricio_/",
+                  label: "Instagram",
+                },
+                {
                   icon: Mail,
                   href: "mailto:nadiahmauricio@gmail.com",
                   label: "Email",
                 },
-                { icon: Phone, href: "tel:+351920012739", label: "Telefone" },
               ].map((social, index) => {
                 const Icon = social.icon;
                 return (
@@ -892,11 +900,7 @@ function App() {
                   info: "nadiahmauricio@gmail.com",
                   href: "mailto:nadiahmauricio@gmail.com",
                 },
-                {
-                  icon: Phone,
-                  title: "Telefone",
-                  href: "tel:+351920012739",
-                },
+
                 {
                   icon: MapPin,
                   title: language === "pt" ? "Localização" : "Location",
@@ -907,8 +911,14 @@ function App() {
                 {
                   icon: Linkedin,
                   title: "LinkedIn",
-                  info: "/in/nadiahmauricio",
+                  info: "",
                   href: "https://www.linkedin.com/in/nadiahmauricio/",
+                },
+                {
+                  icon: Instagram,
+                  title: "Instagram",
+                  info: "",
+                  href: "https://www.instagram.com/nadiahamauricio_/",
                 },
               ].map((contact, index) => {
                 const Icon = contact.icon;
@@ -1004,6 +1014,10 @@ function App() {
               { icon: Github, href: "https://github.com/Nad1ah" },
               {
                 icon: Linkedin,
+                href: "https://www.linkedin.com/in/nadiahmauricio/",
+              },
+              {
+                icon: Instagram,
                 href: "https://www.linkedin.com/in/nadiahmauricio/",
               },
               { icon: Mail, href: "mailto:nadiahmauricio@gmail.com" },
