@@ -12,330 +12,21 @@ import {
   Database,
   BarChart3,
   Rocket,
+  User,
+  GraduationCap,
   Star,
   ChevronDown,
   Globe,
 } from "lucide-react";
-import "./App.css";
 import profileImage from "./assets/profile.jpg";
-
-// Traduções
-const translations = {
-  pt: {
-    nav: {
-      home: "Início",
-      about: "Sobre",
-      skills: "Skills",
-      projects: "Projetos",
-      education: "Formação",
-      contact: "Contato",
-    },
-    hero: {
-      greeting: "Olá! Eu sou",
-      subtitle: "Desenvolvedora Full Stack & Analista de Dados",
-      description:
-        "Apaixonada por tecnologia, focada em criar soluções inovadoras com React, Node.js, Python e análise de dados. Em transição para a área tech com projetos práticos e aprendizagem contínua.",
-      downloadCV: "Download CV",
-      viewProjects: "Ver Projetos",
-      scrollText: "Scroll para explorar",
-    },
-    about: {
-      title: "Sobre",
-      subtitle: "Mim",
-      cardTitle: "Desenvolvedora em Crescimento",
-      description1:
-        "Estou em uma jornada empolgante de transição para a área de tecnologia, combinando minha paixão por programação com habilidades analíticas para criar soluções inovadoras.",
-      description2:
-        "Com formação em Full Stack Web Development e atualmente estudando Análise de Dados, busco constantemente aprender novas tecnologias e aplicar conhecimentos em projetos práticos.",
-      description3:
-        "Meu foco está em desenvolvimento web moderno, análise de dados e criação de experiências digitais que fazem a diferença.",
-      location: "Lisboa, Portugal",
-      cards: {
-        frontend: { title: "Frontend", desc: "React, HTML/CSS, Tailwind" },
-        backend: { title: "Backend", desc: "Node.js, MongoDB, SQL" },
-        data: { title: "Data Analysis", desc: "Python, Pandas, Power BI" },
-        projects: { title: "Projetos", desc: "MERN Stack, Flask, APIs" },
-      },
-    },
-    skills: {
-      title: "Minhas",
-      subtitle: "Skills",
-      categories: {
-        frontend: "Frontend",
-        backend: "Backend",
-        dataTools: "Data & Tools",
-      },
-    },
-    projects: {
-      title: "Meus",
-      subtitle: "Projetos",
-      description:
-        "Projetos que demonstram minhas habilidades em desenvolvimento full stack e análise de dados",
-      items: [
-        {
-          title: "Sports Dashboard",
-          description:
-            "Dashboard interativo para análise de dados esportivos com visualizações em tempo real.",
-          tech: ["Flask", "React", "Chart.js", "Python"],
-        },
-        {
-          title: "E-commerce Platform",
-          description:
-            "Plataforma completa de e-commerce com carrinho, pagamentos e painel administrativo.",
-          tech: ["React", "Node.js", "MongoDB", "Express"],
-        },
-        {
-          title: "Task Manager",
-          description:
-            "Aplicação de gerenciamento de tarefas com funcionalidades colaborativas.",
-          tech: ["React", "MongoDB", "Node.js", "Socket.io"],
-        },
-        {
-          title: "Análise Bet",
-          description:
-            "Sistema de análise de dados para apostas esportivas com machine learning.",
-          tech: ["Python", "Pandas", "Scikit-learn", "Jupyter"],
-        },
-      ],
-      buttons: {
-        code: "Código",
-        demo: "Demo",
-      },
-    },
-    education: {
-      title: "Minha",
-      subtitle: "Formação",
-      description:
-        "Jornada de aprendizagem contínua em tecnologia e desenvolvimento",
-      current: "Atual",
-      items: [
-        {
-          period: "2024 — 2025",
-          title: "Análise de Dados",
-          institution: "Tripleten",
-          status: "Em curso",
-          description:
-            "Curso intensivo focado em Python, Pandas, visualização de dados e machine learning.",
-        },
-        {
-          period: "2023 — 2024",
-          title: "Full Stack Web Development",
-          institution: "EDIT.",
-          status: "Concluído",
-          description:
-            "Formação completa em desenvolvimento web com React, Node.js, MongoDB e metodologias ágeis.",
-        },
-        {
-          period: "2024",
-          title: "Workshop Python",
-          institution: "EDIT.",
-          status: "Concluído",
-          description:
-            "Workshop intensivo de Python para desenvolvimento e análise de dados.",
-        },
-        {
-          period: "2024",
-          title: "Power BI",
-          institution: "Santander Academy",
-          status: "Concluído",
-          description:
-            "Curso de Business Intelligence e visualização de dados com Power BI.",
-        },
-      ],
-    },
-    contact: {
-      title: "Vamos",
-      subtitle: "Conversar?",
-      description:
-        "Estou sempre aberta a novas oportunidades e colaborações. Entre em contato!",
-      info: "Informações de Contato",
-      cta: {
-        title: "Pronta para Novos Desafios",
-        description:
-          "Estou em busca de oportunidades na área de tecnologia onde possa aplicar minhas habilidades em desenvolvimento web e análise de dados. Vamos criar algo incrível juntos!",
-        features: [
-          "Desenvolvimento Full Stack",
-          "Análise de Dados",
-          "Projetos Inovadores",
-          "Aprendizagem Contínua",
-        ],
-        button: "Enviar Email",
-      },
-      items: {
-        email: "Email",
-        phone: "Telefone",
-        location: "Localização",
-        github: "GitHub",
-        linkedin: "LinkedIn",
-      },
-    },
-    footer: {
-      title: "Nadiah Mauricio",
-      subtitle: "Desenvolvedora Full Stack & Analista de Dados",
-      copyright: "© 2024 Nadiah Mauricio. Feito com ❤️ e muito código.",
-    },
-  },
-  en: {
-    nav: {
-      home: "Home",
-      about: "About",
-      skills: "Skills",
-      projects: "Projects",
-      education: "Education",
-      contact: "Contact",
-    },
-    hero: {
-      greeting: "Hello! I am",
-      subtitle: "Full Stack Developer & Data Analyst",
-      description:
-        "Passionate about technology, focused on creating innovative solutions with React, Node.js, Python and data analysis. Transitioning to tech with practical projects and continuous learning.",
-      downloadCV: "Download CV",
-      viewProjects: "View Projects",
-      scrollText: "Scroll to explore",
-    },
-    about: {
-      title: "About",
-      subtitle: "Me",
-      cardTitle: "Growing Developer",
-      description1:
-        "I am on an exciting journey transitioning to the technology field, combining my passion for programming with analytical skills to create innovative solutions.",
-      description2:
-        "With training in Full Stack Web Development and currently studying Data Analysis, I constantly seek to learn new technologies and apply knowledge in practical projects.",
-      description3:
-        "My focus is on modern web development, data analysis and creating digital experiences that make a difference.",
-      location: "Lisbon, Portugal",
-      cards: {
-        frontend: { title: "Frontend", desc: "React, HTML/CSS, Tailwind" },
-        backend: { title: "Backend", desc: "Node.js, MongoDB, SQL" },
-        data: { title: "Data Analysis", desc: "Python, Pandas, Power BI" },
-        projects: { title: "Projects", desc: "MERN Stack, Flask, APIs" },
-      },
-    },
-    skills: {
-      title: "My",
-      subtitle: "Skills",
-      categories: {
-        frontend: "Frontend",
-        backend: "Backend",
-        dataTools: "Data & Tools",
-      },
-    },
-    projects: {
-      title: "My",
-      subtitle: "Projects",
-      description:
-        "Projects that demonstrate my skills in full stack development and data analysis",
-      items: [
-        {
-          title: "Sports Dashboard",
-          description:
-            "Interactive dashboard for sports data analysis with real-time visualizations.",
-          tech: ["Flask", "React", "Chart.js", "Python"],
-        },
-        {
-          title: "E-commerce Platform",
-          description:
-            "Complete e-commerce platform with cart, payments and administrative panel.",
-          tech: ["React", "Node.js", "MongoDB", "Express"],
-        },
-        {
-          title: "Task Manager",
-          description:
-            "Task management application with collaborative features.",
-          tech: ["React", "MongoDB", "Node.js", "Socket.io"],
-        },
-        {
-          title: "Bet Analysis",
-          description:
-            "Data analysis system for sports betting with machine learning.",
-          tech: ["Python", "Pandas", "Scikit-learn", "Jupyter"],
-        },
-      ],
-      buttons: {
-        code: "Code",
-        demo: "Demo",
-      },
-    },
-    education: {
-      title: "My",
-      subtitle: "Education",
-      description: "Continuous learning journey in technology and development",
-      current: "Current",
-      items: [
-        {
-          period: "2024 — 2025",
-          title: "Data Analysis",
-          institution: "Tripleten",
-          status: "In progress",
-          description:
-            "Intensive course focused on Python, Pandas, data visualization and machine learning.",
-        },
-        {
-          period: "2023 — 2024",
-          title: "Full Stack Web Development",
-          institution: "EDIT.",
-          status: "Completed",
-          description:
-            "Complete training in web development with React, Node.js, MongoDB and agile methodologies.",
-        },
-        {
-          period: "2024",
-          title: "Python Workshop",
-          institution: "EDIT.",
-          status: "Completed",
-          description:
-            "Intensive Python workshop for development and data analysis.",
-        },
-        {
-          period: "2024",
-          title: "Power BI",
-          institution: "Santander Academy",
-          status: "Completed",
-          description:
-            "Business Intelligence and data visualization course with Power BI.",
-        },
-      ],
-    },
-    contact: {
-      title: "Let's",
-      subtitle: "Talk?",
-      description:
-        "I am always open to new opportunities and collaborations. Get in touch!",
-      info: "Contact Information",
-      cta: {
-        title: "Ready for New Challenges",
-        description:
-          "I am looking for opportunities in the technology field where I can apply my skills in web development and data analysis. Let's create something amazing together!",
-        features: [
-          "Full Stack Development",
-          "Data Analysis",
-          "Innovative Projects",
-          "Continuous Learning",
-        ],
-        button: "Send Email",
-      },
-      items: {
-        email: "Email",
-        phone: "Phone",
-        location: "Location",
-        github: "GitHub",
-        linkedin: "LinkedIn",
-      },
-    },
-    footer: {
-      title: "Nadiah Mauricio",
-      subtitle: "Full Stack Developer & Data Analyst",
-      copyright: "© 2024 Nadiah Mauricio. Made with ❤️ and lots of code.",
-    },
-  },
-};
+import "./App.css";
 
 // Particles Component
 const Particles = () => {
   const [particles, setParticles] = useState([]);
 
   useEffect(() => {
-    const newParticles = Array.from({ length: 50 }, (_, i) => ({
+    const newParticles = Array.from({ length: 30 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -399,21 +90,22 @@ const TypingEffect = ({ text }) => {
   );
 };
 
-// Navigation Component
+// Navigation Component with Mobile Menu
 const Navigation = ({
   activeSection,
   setActiveSection,
   language,
   setLanguage,
-  t,
 }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const navItems = [
-    { id: "home", label: t.nav.home },
-    { id: "about", label: t.nav.about },
-    { id: "skills", label: t.nav.skills },
-    { id: "projects", label: t.nav.projects },
-    { id: "education", label: t.nav.education },
-    { id: "contact", label: t.nav.contact },
+    { id: "home", label: language === "pt" ? "Início" : "Home" },
+    { id: "about", label: language === "pt" ? "Sobre" : "About" },
+    { id: "skills", label: "Skills" },
+    { id: "projects", label: language === "pt" ? "Projetos" : "Projects" },
+    { id: "education", label: language === "pt" ? "Formação" : "Education" },
+    { id: "contact", label: language === "pt" ? "Contato" : "Contact" },
   ];
 
   const scrollToSection = (sectionId) => {
@@ -422,16 +114,25 @@ const Navigation = ({
       element.scrollIntoView({ behavior: "smooth" });
     }
     setActiveSection(sectionId);
+    setMobileMenuOpen(false);
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === "pt" ? "en" : "pt");
   };
 
   return (
     <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} className="navigation">
       <div className="nav-container">
-        <motion.div whileHover={{ scale: 1.05 }} className="nav-brand">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className="nav-brand"
+          onClick={() => scrollToSection("home")}
+        >
           NM
         </motion.div>
 
-        <div className="nav-links">
+        <div className={`nav-links ${mobileMenuOpen ? "mobile-open" : ""}`}>
           {navItems.map((item) => (
             <motion.button
               key={item.id}
@@ -445,18 +146,26 @@ const Navigation = ({
               {item.label}
             </motion.button>
           ))}
-
-          {/* Language Toggle */}
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setLanguage(language === "pt" ? "en" : "pt")}
-            className="language-toggle"
-          >
-            <Globe size={16} />
-            <span>{language === "pt" ? "EN" : "PT"}</span>
-          </motion.button>
         </div>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={toggleLanguage}
+          className="language-toggle"
+        >
+          <Globe size={16} />
+          <span>{language.toUpperCase()}</span>
+        </motion.button>
+
+        <button
+          className={`mobile-menu-toggle ${mobileMenuOpen ? "open" : ""}`}
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </motion.nav>
   );
@@ -465,7 +174,6 @@ const Navigation = ({
 function App() {
   const [activeSection, setActiveSection] = useState("home");
   const [language, setLanguage] = useState("pt");
-  const t = translations[language];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -500,6 +208,73 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const content = {
+    pt: {
+      heroTitle: "Olá! Eu sou",
+      heroSubtitle: "Desenvolvedora Full Stack & Analista de Dados",
+      heroDescription:
+        "Apaixonada por tecnologia, focada em criar soluções inovadoras com React, Node.js, Python e análise de dados. Em transição para a área tech com projetos práticos e aprendizagem contínua.",
+      downloadCV: "Download CV",
+      viewProjects: "Ver Projetos",
+      scrollToExplore: "Scroll para explorar",
+      aboutTitle: "Sobre",
+      aboutSubtitle: "Mim",
+      aboutHeading: "Desenvolvedora em Crescimento",
+      aboutText1:
+        "Estou em uma jornada empolgante de transição para a área de tecnologia, combinando minha paixão por programação com habilidades analíticas para criar soluções inovadoras.",
+      aboutText2:
+        "Com formação em Full Stack Web Development e Análise de Dados, busco constantemente aprender novas tecnologias e aplicar conhecimentos em projetos práticos.",
+      aboutText3:
+        "Meu foco está em desenvolvimento web moderno, análise de dados e criação de experiências digitais que fazem a diferença.",
+      location: "Lisboa, Portugal",
+      skillsTitle: "Minhas",
+      skillsSubtitle: "Skills",
+      projectsTitle: "Meus",
+      projectsSubtitle: "Projetos",
+      educationTitle: "Minha",
+      educationSubtitle: "Formação",
+      contactTitle: "Vamos",
+      contactSubtitle: "Conversar?",
+      contactCTA: "Pronta para novos desafios!",
+      contactDescription:
+        "Estou sempre aberta a novas oportunidades e colaborações. Vamos conversar sobre como posso contribuir para o seu projeto!",
+      contactButton: "Entrar em Contato",
+    },
+    en: {
+      heroTitle: "Hello! I'm",
+      heroSubtitle: "Full Stack Developer & Data Analyst",
+      heroDescription:
+        "Passionate about technology, focused on creating innovative solutions with React, Node.js, Python and data analysis. Transitioning to tech with practical projects and continuous learning.",
+      downloadCV: "Download CV",
+      viewProjects: "View Projects",
+      scrollToExplore: "Scroll to explore",
+      aboutTitle: "About",
+      aboutSubtitle: "Me",
+      aboutHeading: "Growing Developer",
+      aboutText1:
+        "I'm on an exciting journey transitioning to the technology field, combining my passion for programming with analytical skills to create innovative solutions.",
+      aboutText2:
+        "With training in Full Stack Web Development and Data Analysis, I constantly seek to learn new technologies and apply knowledge in practical projects.",
+      aboutText3:
+        "My focus is on modern web development, data analysis and creating digital experiences that make a difference.",
+      location: "Lisbon, Portugal",
+      skillsTitle: "My",
+      skillsSubtitle: "Skills",
+      projectsTitle: "My",
+      projectsSubtitle: "Projects",
+      educationTitle: "My",
+      educationSubtitle: "Education",
+      contactTitle: "Let's",
+      contactSubtitle: "Talk?",
+      contactCTA: "Ready for new challenges!",
+      contactDescription:
+        "I'm always open to new opportunities and collaborations. Let's talk about how I can contribute to your project!",
+      contactButton: "Get in Touch",
+    },
+  };
+
+  const currentContent = content[language];
+
   return (
     <div className="app">
       <Navigation
@@ -507,7 +282,6 @@ function App() {
         setActiveSection={setActiveSection}
         language={language}
         setLanguage={setLanguage}
-        t={t}
       />
 
       {/* Hero Section */}
@@ -522,11 +296,12 @@ function App() {
               transition={{ delay: 0.2 }}
               className="hero-title"
             >
-              {t.hero.greeting} <span className="highlight">Nadiah</span>
+              {currentContent.heroTitle}{" "}
+              <span className="highlight">Nadiah</span>
             </motion.h1>
 
             <div className="hero-subtitle">
-              <TypingEffect text={t.hero.subtitle} />
+              <TypingEffect text={currentContent.heroSubtitle} />
             </div>
 
             <motion.p
@@ -535,7 +310,7 @@ function App() {
               transition={{ delay: 0.6 }}
               className="hero-description"
             >
-              {t.hero.description}
+              {currentContent.heroDescription}
             </motion.p>
 
             <motion.div
@@ -548,10 +323,12 @@ function App() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="btn-primary"
-                onClick={() => window.open("/cv_nadiah.pdf", "_blank")}
+                onClick={() =>
+                  window.open("./assets/cv_nadiah_mauricio.jpg", "_blank")
+                }
               >
                 <Download size={20} />
-                <span>{t.hero.downloadCV}</span>
+                <span>{currentContent.downloadCV}</span>
               </motion.button>
 
               <motion.button
@@ -564,11 +341,10 @@ function App() {
                     .scrollIntoView({ behavior: "smooth" })
                 }
               >
-                {t.hero.viewProjects}
+                {currentContent.viewProjects}
               </motion.button>
             </motion.div>
 
-            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -626,6 +402,7 @@ function App() {
                 className="profile-ring"
               />
 
+              {/* FOTO CORRIGIDA - usando img tag em vez de background */}
               <div className="profile-image">
                 <img
                   src={profileImage}
@@ -636,7 +413,22 @@ function App() {
                     objectFit: "cover",
                     borderRadius: "50%",
                   }}
+                  onError={(e) => {
+                    console.log("Erro ao carregar imagem:", e);
+                    e.target.style.display = "none";
+                  }}
+                  onLoad={() => {
+                    console.log("Imagem carregada com sucesso!");
+                  }}
                 />
+
+                {/* Placeholder só aparece se a imagem falhar */}
+                <div
+                  className="profile-placeholder"
+                  style={{ display: "none" }}
+                >
+                  <User size={80} />
+                </div>
               </div>
 
               <motion.div
@@ -658,7 +450,6 @@ function App() {
           </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -670,7 +461,7 @@ function App() {
             transition={{ duration: 1.5, repeat: Infinity }}
             className="scroll-content"
           >
-            <span>{t.hero.scrollText}</span>
+            <span>{currentContent.scrollToExplore}</span>
             <ChevronDown size={24} />
           </motion.div>
         </motion.div>
@@ -687,8 +478,8 @@ function App() {
             className="section-header"
           >
             <h2>
-              {t.about.title}{" "}
-              <span className="highlight">{t.about.subtitle}</span>
+              {currentContent.aboutTitle}{" "}
+              <span className="highlight">{currentContent.aboutSubtitle}</span>
             </h2>
             <div className="section-divider"></div>
           </motion.div>
@@ -701,14 +492,14 @@ function App() {
               viewport={{ once: true }}
               className="about-text"
             >
-              <h3>{t.about.cardTitle}</h3>
-              <p>{t.about.description1}</p>
-              <p>{t.about.description2}</p>
-              <p>{t.about.description3}</p>
+              <h3>{currentContent.aboutHeading}</h3>
+              <p>{currentContent.aboutText1}</p>
+              <p>{currentContent.aboutText2}</p>
+              <p>{currentContent.aboutText3}</p>
 
               <div className="location">
                 <MapPin size={20} />
-                <span>{t.about.location}</span>
+                <span>{currentContent.location}</span>
               </div>
             </motion.div>
 
@@ -722,23 +513,23 @@ function App() {
               {[
                 {
                   icon: Code,
-                  title: t.about.cards.frontend.title,
-                  desc: t.about.cards.frontend.desc,
+                  title: "Frontend",
+                  desc: "React, HTML/CSS, Tailwind",
                 },
                 {
                   icon: Database,
-                  title: t.about.cards.backend.title,
-                  desc: t.about.cards.backend.desc,
+                  title: "Backend",
+                  desc: "Node.js, MongoDB, SQL",
                 },
                 {
                   icon: BarChart3,
-                  title: t.about.cards.data.title,
-                  desc: t.about.cards.data.desc,
+                  title: "Data Analysis",
+                  desc: "Python, Pandas, Power BI",
                 },
                 {
                   icon: Rocket,
-                  title: t.about.cards.projects.title,
-                  desc: t.about.cards.projects.desc,
+                  title: language === "pt" ? "Projetos" : "Projects",
+                  desc: "MERN Stack, Flask, APIs",
                 },
               ].map((item, index) => {
                 const Icon = item.icon;
@@ -772,8 +563,8 @@ function App() {
             className="section-header"
           >
             <h2>
-              {t.skills.title}{" "}
-              <span className="highlight">{t.skills.subtitle}</span>
+              {currentContent.skillsTitle}{" "}
+              <span className="highlight">{currentContent.skillsSubtitle}</span>
             </h2>
             <div className="section-divider"></div>
           </motion.div>
@@ -781,7 +572,7 @@ function App() {
           <div className="skills-grid">
             {[
               {
-                title: t.skills.categories.frontend,
+                title: "Frontend",
                 icon: Code,
                 skills: [
                   { name: "React", level: 85 },
@@ -791,7 +582,7 @@ function App() {
                 ],
               },
               {
-                title: t.skills.categories.backend,
+                title: "Backend",
                 icon: Database,
                 skills: [
                   { name: "Node.js", level: 75 },
@@ -801,7 +592,7 @@ function App() {
                 ],
               },
               {
-                title: t.skills.categories.dataTools,
+                title: "Data & Tools",
                 icon: BarChart3,
                 skills: [
                   { name: "Python", level: 80 },
@@ -830,7 +621,14 @@ function App() {
 
                   <div className="skills-list">
                     {category.skills.map((skill, skillIndex) => (
-                      <div key={skillIndex} className="skill-item">
+                      <motion.div
+                        key={skillIndex}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6, delay: skillIndex * 0.1 }}
+                        viewport={{ once: true }}
+                        className="skill-item"
+                      >
                         <div className="skill-info">
                           <span className="skill-name">{skill.name}</span>
                           <span className="skill-level">{skill.level}%</span>
@@ -847,7 +645,7 @@ function App() {
                             className="skill-progress"
                           />
                         </div>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
                 </motion.div>
@@ -868,32 +666,68 @@ function App() {
             className="section-header"
           >
             <h2>
-              {t.projects.title}{" "}
-              <span className="highlight">{t.projects.subtitle}</span>
+              {currentContent.projectsTitle}{" "}
+              <span className="highlight">
+                {currentContent.projectsSubtitle}
+              </span>
             </h2>
             <div className="section-divider"></div>
-            <p>{t.projects.description}</p>
           </motion.div>
 
           <div className="projects-grid">
-            {t.projects.items.map((project, index) => (
+            {[
+              {
+                title: "E-commerce Platform",
+                description:
+                  language === "pt"
+                    ? "Plataforma completa de e-commerce com React, Node.js e MongoDB. Inclui autenticação, carrinho de compras e painel administrativo."
+                    : "Complete e-commerce platform with React, Node.js and MongoDB. Includes authentication, shopping cart and admin panel.",
+                tech: ["React", "Node.js", "MongoDB", "Stripe"],
+                color: "project-blue",
+                icon: <Rocket size={40} />,
+              },
+              {
+                title: "Data Analytics Dashboard",
+                description:
+                  language === "pt"
+                    ? "Dashboard interativo para análise de dados com Python, Pandas e visualizações dinâmicas. Conecta com APIs externas."
+                    : "Interactive dashboard for data analysis with Python, Pandas and dynamic visualizations. Connects with external APIs.",
+                tech: ["Python", "Pandas", "Flask", "Chart.js"],
+                color: "project-green",
+                icon: <BarChart3 size={40} />,
+              },
+              {
+                title: "Task Management App",
+                description:
+                  language === "pt"
+                    ? "Aplicação de gestão de tarefas com funcionalidades avançadas, drag & drop e colaboração em tempo real."
+                    : "Task management application with advanced features, drag & drop and real-time collaboration.",
+                tech: ["React", "Firebase", "Material-UI"],
+                color: "project-purple",
+                icon: <Code size={40} />,
+              },
+              {
+                title: "Portfolio Website",
+                description:
+                  language === "pt"
+                    ? "Website portfolio responsivo com animações suaves, design moderno e otimizado para SEO."
+                    : "Responsive portfolio website with smooth animations, modern design and SEO optimized.",
+                tech: ["React", "Framer Motion", "CSS3"],
+                color: "project-orange",
+                icon: <Star size={40} />,
+              },
+            ].map((project, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10 }}
                 className="project-card"
               >
-                <div
-                  className={`project-image project-${
-                    ["blue", "green", "purple", "orange"][index]
-                  }`}
-                >
-                  <div className="project-overlay">
-                    <Rocket size={48} />
-                  </div>
+                <div className={`project-image ${project.color}`}>
+                  <div className="project-overlay">{project.icon}</div>
                 </div>
 
                 <div className="project-content">
@@ -909,29 +743,18 @@ function App() {
                   </div>
 
                   <div className="project-links">
-                    <motion.a
-                      href="https://github.com/Nad1ah"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="project-link primary"
-                    >
-                      <Github size={16} />
-                      <span>{t.projects.buttons.code}</span>
-                    </motion.a>
-
-                    <motion.a
-                      href="#"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="project-link secondary"
-                    >
+                    <a href="#" className="project-link primary">
                       <ExternalLink size={16} />
-                      <span>{t.projects.buttons.demo}</span>
-                    </motion.a>
+                      <span>
+                        {language === "pt" ? "Ver Demo" : "View Demo"}
+                      </span>
+                    </a>
+                    <a href="#" className="project-link secondary">
+                      <Github size={16} />
+                      <span>
+                        {language === "pt" ? "Ver Código" : "View Code"}
+                      </span>
+                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -951,53 +774,78 @@ function App() {
             className="section-header"
           >
             <h2>
-              {t.education.title}{" "}
-              <span className="highlight">{t.education.subtitle}</span>
+              {currentContent.educationTitle}{" "}
+              <span className="highlight">
+                {currentContent.educationSubtitle}
+              </span>
             </h2>
             <div className="section-divider"></div>
-            <p>{t.education.description}</p>
           </motion.div>
 
           <div className="timeline">
             <div className="timeline-line"></div>
 
-            {t.education.items.map((item, index) => (
+            {[
+              {
+                period: "2025",
+                title: language === "pt" ? "Análise de Dados" : "Data Analysis",
+                institution: "TripleTen",
+                description:
+                  language === "pt"
+                    ? "Curso completo focado em análise de dados, Python, estatística e visualização de dados com ferramentas modernas."
+                    : "Complete course focused on data analysis, Python, statistics and data visualization with modern tools.",
+                status: "completed",
+                side: "right",
+              },
+              {
+                period: "2024",
+                title:
+                  language === "pt"
+                    ? "Full Stack Web Development"
+                    : "Full Stack Web Development",
+                institution: "EDIT - Disruptive Digital Education",
+                description:
+                  language === "pt"
+                    ? "Formação completa em desenvolvimento web com React, Node.js, MongoDB e tecnologias modernas."
+                    : "Complete training in web development with React, Node.js, MongoDB and modern technologies.",
+                status: "completed",
+                side: "left",
+              },
+              {
+                period: "2023",
+                title:
+                  language === "pt"
+                    ? "Introdução à Programação"
+                    : "Introduction to Programming",
+                institution:
+                  language === "pt" ? "Cursos Online" : "Online Courses",
+                description:
+                  language === "pt"
+                    ? "Primeiros passos na programação com JavaScript, HTML, CSS e fundamentos de lógica de programação."
+                    : "First steps in programming with JavaScript, HTML, CSS and programming logic fundamentals.",
+                status: "completed",
+                side: "right",
+              },
+            ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                initial={{ opacity: 0, x: item.side === "left" ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className={`timeline-item ${
-                  index % 2 === 0 ? "left" : "right"
-                }`}
+                className={`timeline-item ${item.side}`}
               >
-                <motion.div
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className="timeline-content"
-                >
-                  {index === 0 && (
-                    <div className="current-badge">{t.education.current}</div>
-                  )}
-
+                <div className="timeline-content">
                   <div className="timeline-period">{item.period}</div>
                   <h3>{item.title}</h3>
-                  <p className="institution">{item.institution}</p>
+                  <div className="institution">{item.institution}</div>
                   <p className="description">{item.description}</p>
 
-                  <div
-                    className={`status-badge ${
-                      index === 0 ? "current" : "completed"
-                    }`}
-                  >
-                    {item.status}
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  className="timeline-dot"
-                />
+                  <span className={`status-badge ${item.status}`}>
+                    {language === "pt" ? "Concluído" : "Completed"}
+                  </span>
+                </div>
+                <div className="timeline-dot"></div>
               </motion.div>
             ))}
           </div>
@@ -1015,11 +863,12 @@ function App() {
             className="section-header"
           >
             <h2>
-              {t.contact.title}{" "}
-              <span className="highlight">{t.contact.subtitle}</span>
+              {currentContent.contactTitle}{" "}
+              <span className="highlight">
+                {currentContent.contactSubtitle}
+              </span>
             </h2>
             <div className="section-divider"></div>
-            <p>{t.contact.description}</p>
           </motion.div>
 
           <div className="contact-content">
@@ -1030,37 +879,35 @@ function App() {
               viewport={{ once: true }}
               className="contact-info"
             >
-              <h3>{t.contact.info}</h3>
+              <h3>
+                {language === "pt"
+                  ? "Informações de Contato"
+                  : "Contact Information"}
+              </h3>
 
               {[
                 {
                   icon: Mail,
-                  title: t.contact.items.email,
-                  value: "nadiahmauricio@gmail.com",
+                  title: "Email",
+                  info: "nadiahmauricio@gmail.com",
                   href: "mailto:nadiahmauricio@gmail.com",
                 },
                 {
                   icon: Phone,
-                  title: t.contact.items.phone,
-                  value: "(+351) 920 012 739",
+                  title: "Telefone",
                   href: "tel:+351920012739",
                 },
                 {
                   icon: MapPin,
-                  title: t.contact.items.location,
-                  value: "Lisboa, Portugal",
+                  title: language === "pt" ? "Localização" : "Location",
+                  info:
+                    language === "pt" ? "Lisboa, Portugal" : "Lisbon, Portugal",
                   href: "#",
                 },
                 {
-                  icon: Github,
-                  title: t.contact.items.github,
-                  value: "github.com/Nad1ah",
-                  href: "https://github.com/Nad1ah",
-                },
-                {
                   icon: Linkedin,
-                  title: t.contact.items.linkedin,
-                  value: "linkedin.com/in/nadiahmauricio",
+                  title: "LinkedIn",
+                  info: "/in/nadiahmauricio",
                   href: "https://www.linkedin.com/in/nadiahmauricio/",
                 },
               ].map((contact, index) => {
@@ -1069,9 +916,15 @@ function App() {
                   <motion.a
                     key={index}
                     href={contact.href}
-                    target="_blank"
+                    target={
+                      contact.href.startsWith("http") ? "_blank" : "_self"
+                    }
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02, x: 10 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.02 }}
                     className="contact-item"
                   >
                     <div className="contact-icon">
@@ -1079,7 +932,7 @@ function App() {
                     </div>
                     <div className="contact-details">
                       <h4>{contact.title}</h4>
-                      <p>{contact.value}</p>
+                      <p>{contact.info}</p>
                     </div>
                   </motion.a>
                 );
@@ -1093,21 +946,29 @@ function App() {
               viewport={{ once: true }}
               className="contact-cta"
             >
-              <h3>{t.contact.cta.title}</h3>
-              <p>{t.contact.cta.description}</p>
+              <h3>{currentContent.contactCTA}</h3>
+              <p>{currentContent.contactDescription}</p>
 
               <div className="cta-features">
-                {t.contact.cta.features.map((item, index) => (
+                {[
+                  language === "pt" ? "Resposta rápida" : "Quick response",
+                  language === "pt"
+                    ? "Disponível para projetos"
+                    : "Available for projects",
+                  language === "pt"
+                    ? "Colaboração remota"
+                    : "Remote collaboration",
+                ].map((feature, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
                     viewport={{ once: true }}
                     className="cta-feature"
                   >
                     <Star size={16} />
-                    <span>{item}</span>
+                    <span>{feature}</span>
                   </motion.div>
                 ))}
               </div>
@@ -1119,7 +980,7 @@ function App() {
                 className="cta-button"
               >
                 <Mail size={20} />
-                <span>{t.contact.cta.button}</span>
+                <span>{currentContent.contactButton}</span>
               </motion.a>
             </motion.div>
           </div>
@@ -1129,45 +990,50 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="footer-info"
-          >
-            <h3>{t.footer.title}</h3>
-            <p>{t.footer.subtitle}</p>
+          <div className="footer-info">
+            <h3>Nadiah Mauricio</h3>
+            <p>
+              {language === "pt"
+                ? "Desenvolvedora Full Stack & Analista de Dados"
+                : "Full Stack Developer & Data Analyst"}
+            </p>
+          </div>
 
-            <div className="footer-social">
-              {[
-                { icon: Github, href: "https://github.com/Nad1ah" },
-                {
-                  icon: Linkedin,
-                  href: "https://www.linkedin.com/in/nadiahmauricio/",
-                },
-                { icon: Mail, href: "mailto:nadiahmauricio@gmail.com" },
-              ].map((social, index) => {
-                const Icon = social.icon;
-                return (
-                  <motion.a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.2, y: -2 }}
-                    className="footer-social-link"
-                  >
-                    <Icon size={20} />
-                  </motion.a>
-                );
-              })}
-            </div>
+          <div className="footer-social">
+            {[
+              { icon: Github, href: "https://github.com/Nad1ah" },
+              {
+                icon: Linkedin,
+                href: "https://www.linkedin.com/in/nadiahmauricio/",
+              },
+              { icon: Mail, href: "mailto:nadiahmauricio@gmail.com" },
+            ].map((social, index) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={index}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-link"
+                >
+                  <Icon size={20} />
+                </a>
+              );
+            })}
+          </div>
 
-            <div className="footer-copyright">
-              <p>{t.footer.copyright}</p>
-            </div>
-          </motion.div>
+          <div className="footer-copyright">
+            <p>
+              © 2025 Nadiah Mauricio.{" "}
+              {language === "pt"
+                ? "Todos os direitos reservados."
+                : "All rights reserved."}
+              <div className="border-t border-gray-800 pt-8">
+                <p className="text-gray-500">Feito com ❤️ e muito código.</p>
+              </div>
+            </p>
+          </div>
         </div>
       </footer>
     </div>
