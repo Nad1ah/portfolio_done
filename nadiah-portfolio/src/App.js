@@ -326,7 +326,7 @@ function App() {
                 className="btn-primary"
                 onClick={() =>
                   window.open(
-                    "https://drive.google.com/file/d/1_26diCA-jINZmRwAZZm6gfCADtz-umhV/view",
+                    "https://drive.google.com/file/d/1-D7GtfjSUKomMEdJ1Xe0zfGY6CS3zSOC/view",
                     "_blank"
                   )
                 }
@@ -409,8 +409,6 @@ function App() {
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 className="profile-ring"
               />
-
-              {/* FOTO CORRIGIDA - usando img tag em vez de background */}
               <div className="profile-image">
                 <img
                   src={profileImage}
@@ -583,10 +581,18 @@ function App() {
                 title: "Frontend",
                 icon: Code,
                 skills: [
+                  { name: "HTML5", level: 90 },
+                  { name: "CSS3", level: 90 },
+                  { name: "SASS", level: 80 },
+                  { name: "Bootstrap", level: 75 },
+                  { name: "JavaScript (ES6+)", level: 85 },
+                  { name: "TypeScript", level: 70 },
                   { name: "React", level: 85 },
-                  { name: "HTML/CSS", level: 90 },
-                  { name: "Tailwind", level: 80 },
-                  { name: "JavaScript", level: 85 },
+                  { name: "Ajax", level: 75 },
+                  { name: "JSON", level: 80 },
+                  { name: "XML", level: 70 },
+                  { name: "Shell Script", level: 60 },
+                  { name: "PowerShell", level: 60 },
                 ],
               },
               {
@@ -594,19 +600,32 @@ function App() {
                 icon: Database,
                 skills: [
                   { name: "Node.js", level: 75 },
-                  { name: "MongoDB", level: 70 },
-                  { name: "SQL", level: 80 },
+                  { name: "Express.js", level: 70 },
+                  { name: "Java (basic)", level: 50 },
+                  { name: "Python", level: 60 },
+                  { name: "MongoDB (NoSQL)", level: 70 },
+                  { name: "MySQL", level: 80 },
+                  { name: "PostgreSQL", level: 75 },
+                  { name: "SQL Server", level: 70 },
                   { name: "APIs REST", level: 75 },
+                  { name: "Postman", level: 70 },
                 ],
               },
               {
                 title: "Data & Tools",
                 icon: BarChart3,
                 skills: [
-                  { name: "Python", level: 80 },
-                  { name: "Pandas", level: 75 },
+                  { name: "Python com Pandas", level: 80 },
+                  { name: "NumPy", level: 70 },
+                  { name: "Jupyter Notebook", level: 75 },
+                  { name: "Anaconda", level: 70 },
                   { name: "Power BI", level: 70 },
-                  { name: "Git", level: 85 },
+                  { name: "SQL (MySQL, PostgreSQL, SQL Server)", level: 75 },
+                  { name: "ETL", level: 65 },
+                  { name: "Data Mining", level: 60 },
+                  { name: "OLAP", level: 60 },
+                  { name: "Tableau", level: 65 },
+                  { name: "Pentaho", level: 60 },
                 ],
               },
             ].map((category, categoryIndex) => {
@@ -782,9 +801,9 @@ function App() {
             className="section-header"
           >
             <h2>
-              {currentContent.educationTitle}{" "}
+              {language === "pt" ? "Formação" : "Education"}{" "}
               <span className="highlight">
-                {currentContent.educationSubtitle}
+                {language === "pt" ? "e Certificações" : "and Certifications"}
               </span>
             </h2>
             <div className="section-divider"></div>
@@ -800,37 +819,65 @@ function App() {
                 institution: "TripleTen",
                 description:
                   language === "pt"
-                    ? "Curso completo focado em análise de dados, Python, estatística e visualização de dados com ferramentas modernas."
-                    : "Complete course focused on data analysis, Python, statistics and data visualization with modern tools.",
+                    ? "Formação prática em Python, Pandas, Power BI, SQL, modelagem de dados e projetos reais para o portfólio."
+                    : "Practical training in Python, Pandas, Power BI, SQL, data modeling and real projects for portfolio.",
+                certificateLink:
+                  "https://drive.google.com/file/d/1zDM9M5gFtUh6ob8ibdgprZDrpJ10mtI_/view",
                 status: "completed",
                 side: "right",
               },
               {
                 period: "2024",
-                title:
-                  language === "pt"
-                    ? "Full Stack Web Development"
-                    : "Full Stack Web Development",
+                title: "Full Stack Web Development",
                 institution: "EDIT - Disruptive Digital Education",
                 description:
                   language === "pt"
-                    ? "Formação completa em desenvolvimento web com React, Node.js, MongoDB e tecnologias modernas."
-                    : "Complete training in web development with React, Node.js, MongoDB and modern technologies.",
+                    ? "Curso intensivo em React, Node.js, APIs REST, MongoDB, HTML5, CSS3, TypeScript e Git."
+                    : "Intensive course in React, Node.js, REST APIs, MongoDB, HTML5, CSS3, TypeScript and Git.",
+                certificateLink:
+                  "https://drive.google.com/file/d/1I_3IsVI7jFFBAnMUg2NY3drHTbTHg3jJ/view",
                 status: "completed",
                 side: "left",
               },
               {
-                period: "2023",
-                title:
-                  language === "pt"
-                    ? "Introdução à Programação"
-                    : "Introduction to Programming",
-                institution:
-                  language === "pt" ? "Cursos Online" : "Online Courses",
+                period: "2024",
+                title: "Power BI",
+                institution: "Santander Open Academy",
                 description:
                   language === "pt"
-                    ? "Primeiros passos na programação com JavaScript, HTML, CSS e fundamentos de lógica de programação."
-                    : "First steps in programming with JavaScript, HTML, CSS and programming logic fundamentals.",
+                    ? "Curso de introdução ao Power BI com criação de dashboards interativos e modelagem de dados."
+                    : "Introductory course in Power BI with dashboard creation and data modeling.",
+                certificateLink:
+                  "https://drive.google.com/file/d/1b4mFcxPHTUsDNzCRxxoRWaKU5_nKLkXe/view",
+                status: "completed",
+                side: "right",
+              },
+              {
+                period: "2024",
+                title: "Workshop Python",
+                institution: "EDIT - Lisboa",
+                description:
+                  language === "pt"
+                    ? "Workshop introdutório com estruturas básicas de Python, boas práticas e pequenos projetos."
+                    : "Introductory workshop covering Python basics, best practices and small projects.",
+                certificateLink:
+                  "https://drive.google.com/file/d/1QzdckILJiF_NAvEkZ8JgvHTt-jmhrk8a/view",
+                status: "completed",
+                side: "left",
+              },
+              {
+                period: "2024",
+                title:
+                  language === "pt"
+                    ? "Websites e Apps sem Código"
+                    : "No-Code Websites & Apps",
+                institution: "NoCode Institute",
+                description:
+                  language === "pt"
+                    ? "Criação de apps com Glide, WordPress e lógica de automação com ferramentas NoCode."
+                    : "App creation using Glide, WordPress and workflow logic with NoCode tools.",
+                certificateLink:
+                  "https://drive.google.com/file/d/1SvammFbpgrcTmWl-asblAV_3T51BomCd/view",
                 status: "completed",
                 side: "right",
               },
@@ -848,10 +895,23 @@ function App() {
                   <h3>{item.title}</h3>
                   <div className="institution">{item.institution}</div>
                   <p className="description">{item.description}</p>
-
-                  <span className={`status-badge ${item.status}`}>
-                    {language === "pt" ? "Concluído" : "Completed"}
-                  </span>
+                  {item.certificateLink && (
+                    <div className="button-group">
+                      <div className="project-link secondary">
+                        {language === "pt" ? "Concluído" : "Completed"}
+                      </div>
+                      <a
+                        href={item.certificateLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link primary"
+                      >
+                        {language === "pt"
+                          ? "Ver Certificado"
+                          : "View Certificate"}
+                      </a>
+                    </div>
+                  )}
                 </div>
                 <div className="timeline-dot"></div>
               </motion.div>
